@@ -1,5 +1,4 @@
-
--- Tabla: customers
+-- table: customers
 CREATE TABLE customers (
     customer_id      NUMBER PRIMARY KEY,
     full_name        VARCHAR2(100),
@@ -12,7 +11,7 @@ INSERT INTO customers VALUES (3, 'Carla Gomez', 'Savings');
 INSERT INTO customers VALUES (4, 'Daniel Lee', 'Checking');
 INSERT INTO customers VALUES (5, 'Eva Rodríguez', 'Savings');
 
--- Tabla: transactions
+-- table: transactions
 CREATE TABLE transactions (
     transaction_id   NUMBER PRIMARY KEY,
     customer_id      NUMBER,
@@ -28,7 +27,7 @@ INSERT INTO transactions VALUES (103, 3, 'Deposit',     1500.00, TO_DATE('2024-0
 INSERT INTO transactions VALUES (104, 4, 'Withdrawal',  300.00,  TO_DATE('2024-04-25','YYYY-MM-DD'));
 INSERT INTO transactions VALUES (105, 5, 'Deposit',     500.00,  TO_DATE('2024-06-01','YYYY-MM-DD'));
 
--- Tabla: account_balance
+-- table: account_balance
 CREATE TABLE account_balance (
     customer_id NUMBER,
     balance     NUMBER(12,2),
@@ -43,7 +42,7 @@ INSERT INTO account_balance VALUES (3, 1800.00, TO_DATE('2024-06-01','YYYY-MM-DD
 INSERT INTO account_balance VALUES (4, 2200.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO account_balance VALUES (5, 4000.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 
--- Tabla: daily_balance
+-- table: daily_balance
 CREATE TABLE daily_balance (
     record_id   NUMBER PRIMARY KEY,
     customer_id NUMBER,
@@ -58,7 +57,7 @@ INSERT INTO daily_balance VALUES (3, 3, 1700.00, TO_DATE('2024-06-01','YYYY-MM-D
 INSERT INTO daily_balance VALUES (4, 4, 2500.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO daily_balance VALUES (5, 5, 3900.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 
--- Tabla: evaluates
+-- table: evaluates
 CREATE TABLE evaluates (
     evaluator_id  NUMBER PRIMARY KEY,
     customer_id   NUMBER,
@@ -73,7 +72,7 @@ INSERT INTO evaluates VALUES (3, 3, 70, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO evaluates VALUES (4, 4, 60, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO evaluates VALUES (5, 5, 95, TO_DATE('2024-06-01','YYYY-MM-DD'));
 
--- Tabla: suspicious_activity
+-- table: suspicious_activity
 CREATE TABLE suspicious_activity (
     activity_id     NUMBER PRIMARY KEY,
     customer_id     NUMBER,
@@ -88,7 +87,7 @@ INSERT INTO suspicious_activity VALUES (3, 4, 'Login at 3 AM', TO_DATE('2024-05-
 INSERT INTO suspicious_activity VALUES (4, 1, 'Failed login attempts', TO_DATE('2024-05-16','YYYY-MM-DD'));
 INSERT INTO suspicious_activity VALUES (5, 5, 'Excessive fund transfers', TO_DATE('2024-05-18','YYYY-MM-DD'));
 
--- Tabla: suspicious_transactions
+-- table: suspicious_transactions
 CREATE TABLE suspicious_transactions (
     suspicious_id     NUMBER PRIMARY KEY,
     transaction_id    NUMBER,
@@ -103,7 +102,7 @@ INSERT INTO suspicious_transactions VALUES (3, 105, 'Deposit from unknown source
 INSERT INTO suspicious_transactions VALUES (4, 103, 'Unusual deposit timing', TO_DATE('2024-03-20','YYYY-MM-DD'));
 INSERT INTO suspicious_transactions VALUES (5, 101, 'Account under monitoring', TO_DATE('2024-01-10','YYYY-MM-DD'));
 
--- Tabla: transaction_stats
+-- table: transaction_stats
 CREATE TABLE transaction_stats (
     stat_id           NUMBER PRIMARY KEY,
     customer_id       NUMBER,
@@ -119,7 +118,7 @@ INSERT INTO transaction_stats VALUES (3, 3, 8, 4000.00, TO_DATE('2024-06-01','YY
 INSERT INTO transaction_stats VALUES (4, 4, 12, 3000.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO transaction_stats VALUES (5, 5, 5, 2500.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 
--- Tabla: transaction_summary
+-- table: transaction_summary
 CREATE TABLE transaction_summary (
     summary_id      NUMBER PRIMARY KEY,
     customer_id     NUMBER,
@@ -134,3 +133,47 @@ INSERT INTO transaction_summary VALUES (2, 2, 5000.00, 800.00, TO_DATE('2024-06-
 INSERT INTO transaction_summary VALUES (3, 3, 6000.00, 1000.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO transaction_summary VALUES (4, 4, 4000.00, 500.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
 INSERT INTO transaction_summary VALUES (5, 5, 3500.00, 400.00, TO_DATE('2024-06-01','YYYY-MM-DD'));
+
+-- table: accounts
+CREATE TABLE accounts (
+    account_id     NUMBER PRIMARY KEY,
+    customer_id    NUMBER,
+    balance        NUMBER(12,2),
+    account_status VARCHAR2(20)
+);
+
+INSERT INTO accounts VALUES (1, 1, 5000.00, 'Active');
+INSERT INTO accounts VALUES (2, 2, 3500.00, 'Active');
+INSERT INTO accounts VALUES (3, 3, 1000.00, 'Inactive');
+INSERT INTO accounts VALUES (4, 4, 7200.00, 'Active');
+INSERT INTO accounts VALUES (5, 5, 2500.00, 'Active');
+
+-- table: audit_log
+CREATE TABLE audit_log (
+    log_id         NUMBER PRIMARY KEY,
+    account_id     NUMBER,
+    transaction_id NUMBER,
+    action         VARCHAR2(100),
+    log_date       DATE
+);
+
+INSERT INTO audit_log VALUES (1, 1, 201, 'Processed Transaction', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+INSERT INTO audit_log VALUES (2, 2, 202, 'Processed Transaction', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+INSERT INTO audit_log VALUES (3, 3, 203, 'Processed Transaction', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+INSERT INTO audit_log VALUES (4, 4, 204, 'Processed Transaction', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+INSERT INTO audit_log VALUES (5, 5, 205, 'Processed Transaction', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+
+-- table: fraud_cases
+CREATE TABLE fraud_cases (
+    fraud_id       NUMBER PRIMARY KEY,
+    account_id     NUMBER,
+    transaction_id NUMBER,
+    fraud_type     VARCHAR2(100),
+    detection_date DATE
+);
+
+INSERT INTO fraud_cases VALUES (1, 1, 201, 'Unusual withdrawal pattern', TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+INSERT INTO fraud_cases VALUES (2, 2, 202, 'Excessive transfers', TO_DATE('2024-05-02', 'YYYY-MM-DD'));
+INSERT INTO fraud_cases VALUES (3, 3, 203, 'Multiple login attempts', TO_DATE('2024-05-03', 'YYYY-MM-DD'));
+INSERT INTO fraud_cases VALUES (4, 4, 204, 'Foreign IP detected', TO_DATE('2024-05-04', 'YYYY-MM-DD'));
+INSERT INTO fraud_cases VALUES (5, 5, 205, 'False beneficiary info', TO_DATE('2024-05-05', 'YYYY-MM-DD'));
