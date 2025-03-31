@@ -1,4 +1,3 @@
-
 # 📊 Bank Database System
 
 This project contains the necessary SQL scripts for the complete creation and setup of a **banking-oriented database system**. It includes both the schema definitions, data inserts, and additional SQL queries for analysis and testing.
@@ -34,6 +33,7 @@ This project contains the necessary SQL scripts for the complete creation and se
 - Referential integrity ensured
 - Realistic test data to simulate actual banking operations
 - Includes stored procedures and reporting queries for practical use cases
+- Includes `process_transaction` procedure: processes transactions (deposits, withdrawals, transfers), validates account status and balance, registers audit logs, and flags suspicious activity with fraud case tracking.
 
 ---
 
